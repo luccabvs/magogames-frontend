@@ -1,6 +1,6 @@
 # Mago Games - O mago dos preços baixos
 
-### Spint 1 (Quinta-feira 18/11)
+### Sprint 1 (Quinta-feira 18/11)
   * Iniciar o Projeto FrontEnd
   * Testar algumas requisições
  
