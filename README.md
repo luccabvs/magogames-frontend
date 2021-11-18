@@ -15,4 +15,5 @@
 
 ### Sprint 4 (Terça-feira 30/11)
   * Conectar com o BackEnd
-
+  
+![](arquitetura.jpg)
