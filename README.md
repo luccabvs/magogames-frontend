@@ -17,3 +17,6 @@
   * Conectar com o BackEnd
   
 ![](arquitetura.jpg)
+
+## Dependências:
+  * react-router-dom
