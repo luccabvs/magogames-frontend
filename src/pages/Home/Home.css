@@ -1,0 +1,26 @@
+.search-form{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2%;
+}
+
+.card-group{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+@media only screen and (max-width: 610px) {
+    .card-group{
+        grid-template-columns: unset;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 300px;
+    }
+}

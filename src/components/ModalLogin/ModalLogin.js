@@ -56,7 +56,7 @@ function ModalLogin(props){
         <>
             <Modal show={show} onHide={closeModal}>
                 <Modal.Header closeButton>
-                <img className="modal-title" src="/img/camisa10Logo.png"/>
+                <img className="modal-title" src="/img/magoGames.png"/>
                 </Modal.Header>
                 <Modal.Body>
                 <form className="form-login">
@@ -79,7 +79,7 @@ function ModalLogin(props){
                     Fechar
                 </Button>
                 <Link to="/">
-                    {button && <Button className="navbar-signup" buttonStyle='btn--outline'>Entrar</Button>}
+                    {button && <Button className="" buttonStyle='btn--outline'>Entrar</Button>}
                 </Link>
                 </Modal.Footer>
             </Modal>

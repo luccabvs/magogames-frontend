@@ -47,7 +47,7 @@ function ModalRegistro(props){
         <>
             <Modal show={show} onHide={closeModal}>
                 <Modal.Header closeButton>
-                <img className="modal-title" src="/img/camisa10Logo.png"/>
+                <img className="modal-title" src="/img/magoGames.png"/>
                 </Modal.Header>
                 <Modal.Body>
                 <form className="form-login">
@@ -65,7 +65,7 @@ function ModalRegistro(props){
                 <Button variant="secondary" onClick={closeModal}>
                     Fechar
                 </Button>
-                    {button && <Button className="navbar-signup" buttonStyle='btn--outline'>Registrar</Button>}
+                    {button && <Button className="" buttonStyle='btn--outline'>Registrar</Button>}
                 </Modal.Footer>
             </Modal>
         </>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import './Navbar.css';
-import { Button } from '/home/josermf/Insper/4oSemestre/TecWeb/magogames-frontend/src/components/Button/Button.js';
+import { Button } from '../Button/Button';
 import ModalLogin from '../ModalLogin/ModalLogin';
 import ModalRegistro from '../ModalRegistro/ModalRegistro';
 
@@ -9,7 +9,6 @@ function Navbar(props) {
 
     const [button, setButton] = useState(true);
     const [modal, setModal] = useState(false);
-    const [modalPopUp, setModalPopUp] = useState(false);
   
     const showModal = () => setModal(true);
     
@@ -27,9 +26,6 @@ function Navbar(props) {
       setModal(childData)
       setRegister(childData)
     }
-    const handleModalPopUpCallback = (childData) =>{
-      setModalPopUp(childData)
-    }
     
     const handleRegisterCallback = (childData) =>{
       setRegister(childData)
@@ -45,23 +41,23 @@ function Navbar(props) {
       loginDone()
     }
   
-    const logout = () => {
+    /*const logout = () => {
       setLogin(false);
       setButton(true);
       props.userName("");
       setUserName("");
-    }
+    }*/
 
     return (
         <>
             <nav className="navbar">
                 <div className="navbar-container">
-                <Link to="/" className="navbar-logo">
-                    <img src="/img/magoGames_logo.png" alt="magogames logo"/>
-                </Link>
-                </div>
-                <div className="navbar-signup">
+                  <Link to="/" className="navbar-logo">
+                      <img src="/img/magoGames_logo.png" alt="magogames logo"/>
+                  </Link>
+                  <div className="navbar-signup">
                     {button && <Button className="navbar-signup" onClick={showModal} buttonStyle='btn--outline'>LOGIN</Button>}
+                  </div>
                 </div>
             </nav>
             <div>
