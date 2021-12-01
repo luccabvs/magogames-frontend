@@ -7,7 +7,6 @@ import './Search.css';
 
 const Search = () => {
   return (
-    
     <MDBCol md="6" className="search-left">
       <form className="form-inline mt-4 mb-4">
         <MDBIcon icon="search" />

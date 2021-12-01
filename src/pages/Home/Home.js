@@ -1,13 +1,19 @@
+import React, { useState, useEffect } from 'react';
 import Search from "../../components/Search/Search";
 import CardGames from "../../components/CardGames/CardGames";
 import axios from 'axios';
 import './Home.css'
 
 function Home(){
+    const [testeApi, setTesteApi] = useState([])
 
-    axios.get("https://www.cheapshark.com/api/1.0/deals?sortBy=title").then((response) => { 
-        console.log(response)
-    })
+    useEffect(() => {
+        axios.get('http://localhost:8000/externalAPI/home')
+        .then((response) => { 
+            setTesteApi(response.data)
+        })
+    }, [])
+
     
     return(
         <div>
@@ -15,15 +21,9 @@ function Home(){
                 <Search />
             </div>
             <div className="card-group">
-                <CardGames />
-                <CardGames />
-                <CardGames />
-                <CardGames />
-                <CardGames />
-                <CardGames />
-                <CardGames />
-                <CardGames />
-                <CardGames />
+                {testeApi.map(game => (
+                    <CardGames content = {game} />
+                ))}
             </div>
         </div>
     )
