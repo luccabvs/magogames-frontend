@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MDBCol, MDBIcon } from "mdbreact";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
@@ -14,17 +14,16 @@ const Search = (props) => {
   const [searchValue, setSearchValue] = useState({value:''});
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const min = useRef('');
+  const max = useRef('');
 
   function handleChange(event){
     setSearchValue({value: event.target.value});
   }
+  useEffect(() => { searchRequest() }, [minPrice])
+  useEffect(() => { searchRequest() }, [maxPrice])
 
-  function handleSubmit(event){
-    event.preventDefault();
-    console.log(minPrice)
-    console.log(maxPrice)
-
-    console.log(searchValue.value);
+  function searchRequest(){
     let url = 'http://localhost:8000/externalAPI/search/'
     if (searchValue.value != ''){
       if (minPrice != '' && maxPrice !=''){
@@ -52,20 +51,21 @@ const Search = (props) => {
         url += 'max/'+maxPrice.toString()
       }
     }
-    console.log(url)
+
     axios.get(url)
         .then((response) => { 
           props.searchCallback(response.data)
         })
-
   }
 
-  const handleFilterMinCallback = (childData) => {
-    setMinPrice(childData);
+  function handleSubmit(event){
+    event.preventDefault();
+    searchRequest()
   }
 
-  const handleFilterMaxCallback = (childData) => {
-    setMaxPrice(childData);
+  const handleFilterCallback = (childData) => {
+    setMinPrice(childData.minPrice);
+    setMaxPrice(childData.maxPrice);
   }
 
   return (
@@ -77,7 +77,7 @@ const Search = (props) => {
           <button type="submit" className="enter-button"><BsBoxArrowInRight /></button>
         </form>
       </MDBCol>
-      <Filter filterMaxCallback = {handleFilterMaxCallback} filterMinCallback = {handleFilterMinCallback}/>
+      <Filter filterCallback = {handleFilterCallback}/>
     </>
   );
 }

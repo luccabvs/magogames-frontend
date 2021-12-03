@@ -28,8 +28,8 @@ function Home(props){
                 <Search searchCallback = {handleSearchCallback}/>
             </div>
             <div className="card-group">             
-                {testeApi.map(game => (
-                    <CardGames content = {game} />                    
+                {testeApi.map((game, index) => (
+                    <CardGames key={index} content = {game} />                    
                 ))}
             </div>
         </div>
