@@ -4,8 +4,10 @@ import CardGames from "../../components/CardGames/CardGames";
 import axios from 'axios';
 import './Home.css'
 
-function Home(){
-    const [testeApi, setTesteApi] = useState([])
+
+function Home(props){
+    const [testeApi, setTesteApi] = useState([]);
+    const [searchGames, setSearchGames] = useState();
 
     useEffect(() => {
         axios.get('http://localhost:8000/externalAPI/home')
@@ -14,15 +16,20 @@ function Home(){
         })
     }, [])
 
+    const handleSearchCallback = (childData) => {
+        setTesteApi(childData);
+    }
     
+
+
     return(
         <div>
             <div className="search-form">
-                <Search />
+                <Search searchCallback = {handleSearchCallback}/>
             </div>
-            <div className="card-group">
+            <div className="card-group">             
                 {testeApi.map(game => (
-                    <CardGames content = {game} />
+                    <CardGames content = {game} />                    
                 ))}
             </div>
         </div>

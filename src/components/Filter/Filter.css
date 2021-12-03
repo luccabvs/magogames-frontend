@@ -1,0 +1,14 @@
+.filtro-label{
+    margin-left: 0;
+}
+
+.filtro-input{
+    margin-right: 10%;
+    margin: unset;
+}
+
+.btn-filtrar{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}

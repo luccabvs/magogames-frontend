@@ -16,7 +16,6 @@ function CardGames(props) {
     const handleModalGamesDetailsCallback = (childData) =>{
         setModalGamesDetails(childData)
     }
-
     return(
         <>
             <Card style={{ width: '18rem' }}>

@@ -50,7 +50,7 @@ function ModalGamesDetails(props){
             <ul>
               <li>Nome: {props.content.title}</li>
               <li>Preço médio: {props.content.normalPrice}</li>
-              <li>Preço promocional: {props.content.salePrice}</li>
+              <li>Preço: {props.content.salePrice}</li>
               {store && <li>Loja: {getStore(props.content.storeID)}</li>}
               {gameLookup && <li>Menor preço atingido: {gameLookup.cheapestPriceEver.price}</li>}
             </ul>
