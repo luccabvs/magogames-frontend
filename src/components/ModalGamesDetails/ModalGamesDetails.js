@@ -22,7 +22,7 @@ function ModalGamesDetails(props){
     }
 
     useState(() => {
-      axios.get('http://localhost:8000/externalAPI/store').then((response) => {
+      axios.get('https://magogames-backend.herokuapp.com/externalAPI/store').then((response) => {
         setStore(response.data)
       })
     }, [])
@@ -38,7 +38,7 @@ function ModalGamesDetails(props){
     }
 
     function gameDetails(id){
-      axios.get('http://localhost:8000/externalAPI/gameLookup/'+id).then((response) => {
+      axios.get('https://magogames-backend.herokuapp.com/externalAPI/gameLookup/'+id).then((response) => {
         setGameLookup(response.data)
       })
     }
@@ -48,7 +48,7 @@ function ModalGamesDetails(props){
         'user' : name,
         'favorite' : props.content.dealID
       }
-      axios.post('http://localhost:8000/API/favorite', body).then((response) => {
+      axios.post('https://magogames-backend.herokuapp.com/API/favorite', body).then((response) => {
         console.log(response)
       })
     }

@@ -24,7 +24,7 @@ const Search = (props) => {
   useEffect(() => { searchRequest() }, [maxPrice])
 
   function searchRequest(){
-    let url = 'http://localhost:8000/externalAPI/search/'
+    let url = 'https://magogames-backend.herokuapp.com/externalAPI/search/'
     if (searchValue.value != ''){
       if (minPrice != '' && maxPrice !=''){
         url += searchValue.value+'/'+minPrice.toString()+'/'+maxPrice.toString()

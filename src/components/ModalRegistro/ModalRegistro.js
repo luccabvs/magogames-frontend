@@ -40,7 +40,7 @@ function ModalRegistro(props){
         } else {
             setPasswordIsDifferent(false);
             setNameExists(false)
-            axios.post('http://localhost:8000/API/register/', body).then((response) => {
+            axios.post('https://magogames-backend.herokuapp.com/API/register/', body).then((response) => {
                 closeModal()
             }).catch((error) => {
                 setNameExists(true)

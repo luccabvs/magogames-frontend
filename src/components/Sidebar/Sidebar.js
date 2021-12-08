@@ -15,11 +15,11 @@ function Sidebar(props){
 
 
     /*useEffect(() => {
-        axios.get('http://localhost:8000/API/favorite/'+props.name)
+        axios.get('https://magogames-backend.herokuapp.com/API/favorite/'+props.name)
         .then((response) => {
             var list = [];
             for (var i = 0; i < response.data.length; i++){
-                axios.get('http://localhost:8000/externalAPI/dealLookup/'+response.data[i].favorite.replaceAll("%", "_"))
+                axios.get('https://magogames-backend.herokuapp.com/externalAPI/dealLookup/'+response.data[i].favorite.replaceAll("%", "_"))
                 .then((response) => {
                     list.push(response.data)
                 })
@@ -30,7 +30,7 @@ function Sidebar(props){
 
 
     const logout = () => {
-        axios.post('http://localhost:8000/API/logout/', null, {
+        axios.post('https://magogames-backend.herokuapp.com/API/logout/', null, {
             headers: {
                 Authorization: 'Token ' + props.token
             }

@@ -41,7 +41,7 @@ function ModalLogin(props){
     }
 
     const login = () => {
-        axios.post('http://localhost:8000/API/login/', body).then((response) => {
+        axios.post('https://magogames-backend.herokuapp.com/API/login/', body).then((response) => {
             if (response.data.token !== undefined){
                 setWrongPassword(false)
                 props.loginCallback(name)

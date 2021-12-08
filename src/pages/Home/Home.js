@@ -12,7 +12,7 @@ function Home(props){
     var name = props.name;
 
     useEffect(() => {
-        axios.get('http://localhost:8000/externalAPI/home')
+        axios.get('https://magogames-backend.herokuapp.com/externalAPI/home')
         .then((response) => { 
             setTesteApi(response.data)
         })
