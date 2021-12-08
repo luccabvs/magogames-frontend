@@ -11,6 +11,7 @@ function App() {
   function handleNameCallback(childData){
     setName(childData)
   }
+  
 
   return (
     <>

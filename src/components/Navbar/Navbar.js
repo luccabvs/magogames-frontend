@@ -50,6 +50,7 @@ function Navbar(props) {
     
     const handleLoginSidebarCallback = (childData) =>{
       setLogin(childData)
+      setUserName("")
     }
     
     const handleButtonSidebarCallback = (childData) =>{
@@ -58,9 +59,8 @@ function Navbar(props) {
     
     const handleNameSidebarCallback = (childData) =>{
       setUserName(childData)
+      props.nameCallback(childData);
     }
-
-
 
   
     return (

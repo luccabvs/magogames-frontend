@@ -11,22 +11,23 @@ function Sidebar(props){
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     
-    const [listFavorites, setListFavorites] = useState();
+    const [listFavorites, setListFavorites] = useState([]);
 
-    useEffect(() => {
+
+    /*useEffect(() => {
         axios.get('http://localhost:8000/API/favorite/'+props.name)
         .then((response) => {
             var list = [];
-            for (var i = 0; i < response.data.length; i){
-                axios.get('externalAPI/dealLookup/'+response.data[i].favorite)
+            for (var i = 0; i < response.data.length; i++){
+                axios.get('http://localhost:8000/externalAPI/dealLookup/'+response.data[i].favorite.replaceAll("%", "_"))
                 .then((response) => {
-                    list.push(response)
+                    list.push(response.data)
                 })
             }
-            console.log(list)
             setListFavorites(list);
         })
-    }, [])
+    }, [listFavorites])*/
+
 
     const logout = () => {
         axios.post('http://localhost:8000/API/logout/', null, {
@@ -41,7 +42,6 @@ function Sidebar(props){
             console.log(error)
         }
     )}
-
 
     return (
       <>
@@ -58,7 +58,9 @@ function Sidebar(props){
                   <h1>{props.name}</h1>
                   <Button onClick={logout}>Sair</Button>
               </div>
-              <CardGames name={props.name} key={props.name} content = {props.name} />
+              {listFavorites.map((game, index) => (
+                <CardGames name={props.name} key={index} content = {game} />
+              ))}
           </Offcanvas.Body>
         </Offcanvas>
       </>

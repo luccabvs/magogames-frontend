@@ -58,9 +58,10 @@ function ModalGamesDetails(props){
         <Modal show={show} onHide={closeModal} onClick={gameDetails(props.content.gameID)}>
           <Modal.Header closeButton/>
           <Modal.Body className="popup" >
-            <Button variant="secondary" onClick={postFavorite}>
+            {name !== '' && <Button variant="secondary" onClick={postFavorite}>
               Favoritar
             </Button>
+            }
             <img src={props.content.thumb} />
             <ul>
               <li>Nome: {props.content.title}</li>
