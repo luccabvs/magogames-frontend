@@ -24,6 +24,9 @@ function CardGames(props) {
             <Card className='card' style={{ width: '18rem' }}>
                 <Card.Img className='img' variant="top" src={props.content.thumb}/>
                 <Card.Body>
+                    {props.content.title === undefined && 
+                        <Card.Title>{props.content.name}</Card.Title>
+                    }
                     <Card.Title>{props.content.title}</Card.Title>
                     <div className='price-button'>
                         <h4>$ {props.content.salePrice}</h4>

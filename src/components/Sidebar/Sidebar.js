@@ -14,19 +14,17 @@ function Sidebar(props){
     const [listFavorites, setListFavorites] = useState([]);
 
 
-    /*useEffect(() => {
-        axios.get('https://magogames-backend.herokuapp.com/API/favorite/'+props.name)
-        .then((response) => {
-            var list = [];
-            for (var i = 0; i < response.data.length; i++){
-                axios.get('https://magogames-backend.herokuapp.com/externalAPI/dealLookup/'+response.data[i].favorite.replaceAll("%", "_"))
-                .then((response) => {
-                    list.push(response.data)
-                })
-            }
-            setListFavorites(list);
-        })
-    }, [listFavorites])*/
+    async function favorites(){
+      var favorites = await axios.get('https://magogames-backend.herokuapp.com/API/favorite/'+props.name)
+      var list = [];
+      console.log(favorites)
+      for (var i = 0; i < favorites.data.length; i++){
+        var favorite = await axios.get('https://magogames-backend.herokuapp.com/externalAPI/dealLookup/'+favorites.data[i].favorite.replaceAll("%", "_"))
+        list.push(favorite.data.gameInfo)
+        console.log(favorite.data.gameInfo)
+      } 
+      setListFavorites(list)
+    }
 
 
     const logout = () => {
@@ -45,7 +43,7 @@ function Sidebar(props){
 
     return (
       <>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary" onClick={() => {handleShow(); favorites();}}>
           <BsList />
         </Button>
   
@@ -55,12 +53,18 @@ function Sidebar(props){
           </Offcanvas.Header>
           <Offcanvas.Body>
               <div className='sair'>
-                  <h1>{props.name}</h1>
+                  <h2>{props.name}</h2>
                   <Button onClick={logout}>Sair</Button>
               </div>
-              {listFavorites.map((game, index) => (
-                <CardGames name={props.name} key={index} content = {game} />
-              ))}
+              <div className='favoritos-title'>
+                <h1>Seus Favoritos</h1>
+              </div>
+
+              <div className='cards'>
+                {listFavorites.map((game, index) => (
+                  <CardGames className='card' name={props.name} key={index} content = {game} />
+                ))}
+              </div>              
           </Offcanvas.Body>
         </Offcanvas>
       </>
