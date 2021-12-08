@@ -1,0 +1,69 @@
+import React, { useState, useEffect } from 'react';
+import './Sidebar.css'
+import { Button, Offcanvas } from 'react-bootstrap';
+import { BsList } from "react-icons/bs";
+import CardGames from "../../components/CardGames/CardGames";
+import axios from 'axios';
+
+function Sidebar(props){ 
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    
+    const [listFavorites, setListFavorites] = useState();
+
+    useEffect(() => {
+        axios.get('http://localhost:8000/API/favorite/'+props.name)
+        .then((response) => {
+            var list = [];
+            for (var i = 0; i < response.data.length; i){
+                axios.get('externalAPI/dealLookup/'+response.data[i].favorite)
+                .then((response) => {
+                    list.push(response)
+                })
+            }
+            console.log(list)
+            setListFavorites(list);
+        })
+    }, [])
+
+    const logout = () => {
+        axios.post('http://localhost:8000/API/logout/', null, {
+            headers: {
+                Authorization: 'Token ' + props.token
+            }
+        }).then((response) => {
+            props.loginSidebarCallback(false);
+            props.buttonSidebarCallback(true);
+            props.nameSidebarCallback("");
+        }).catch((error) => {
+            console.log(error)
+        }
+    )}
+
+
+    return (
+      <>
+        <Button variant="primary" onClick={handleShow}>
+          <BsList />
+        </Button>
+  
+        <Offcanvas placement="end" show={show} onHide={handleClose}>
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title></Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+              <div className='sair'>
+                  <h1>{props.name}</h1>
+                  <Button onClick={logout}>Sair</Button>
+              </div>
+              <CardGames name={props.name} key={props.name} content = {props.name} />
+          </Offcanvas.Body>
+        </Offcanvas>
+      </>
+    );
+  
+}
+
+export default Sidebar;

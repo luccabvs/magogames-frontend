@@ -9,6 +9,8 @@ function CardGames(props) {
         flexGrow: 0
     };
 
+    var name = props.name;
+
     const [modalGamesDetails, setModalGamesDetails] = useState(false);
     
     const showModalGamesDetails = () => setModalGamesDetails(true);
@@ -16,16 +18,20 @@ function CardGames(props) {
     const handleModalGamesDetailsCallback = (childData) =>{
         setModalGamesDetails(childData)
     }
+
     return(
         <>
-            <Card style={{ width: '18rem' }}>
+            <Card className='card' style={{ width: '18rem' }}>
                 <Card.Img className='img' variant="top" src={props.content.thumb}/>
                 <Card.Body>
                     <Card.Title>{props.content.title}</Card.Title>
-                    <Button className='botao-ver-mais' variant="primary" onClick={showModalGamesDetails}>Ver mais</Button>
+                    <div className='price-button'>
+                        <h4>$ {props.content.salePrice}</h4>
+                        <Button className='botao-ver-mais' variant="primary" onClick={showModalGamesDetails}>Ver mais</Button>
+                    </div>
                 </Card.Body>
             </Card>
-            {modalGamesDetails && (<ModalGamesDetails content={props.content} parentCallback = {handleModalGamesDetailsCallback}/> )}
+            {modalGamesDetails && (<ModalGamesDetails name = {name} content={props.content} parentCallback = {handleModalGamesDetailsCallback}/> )}
         </>
     )
 

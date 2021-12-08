@@ -8,6 +8,8 @@ import './Home.css'
 function Home(props){
     const [testeApi, setTesteApi] = useState([]);
     const [searchGames, setSearchGames] = useState();
+    
+    var name = props.name;
 
     useEffect(() => {
         axios.get('http://localhost:8000/externalAPI/home')
@@ -19,9 +21,8 @@ function Home(props){
     const handleSearchCallback = (childData) => {
         setTesteApi(childData);
     }
+
     
-
-
     return(
         <div>
             <div className="search-form">
@@ -29,7 +30,7 @@ function Home(props){
             </div>
             <div className="card-group">             
                 {testeApi.map((game, index) => (
-                    <CardGames key={index} content = {game} />                    
+                    <CardGames name={name} key={index} content = {game} />                    
                 ))}
             </div>
         </div>

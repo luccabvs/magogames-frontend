@@ -2,7 +2,7 @@ import { Button } from '../Button/Button';
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
-import './ModalLogin.css'
+import axios from 'axios';
 
 function ModalLogin(props){ 
     const [button, setButton] = useState(true);
@@ -35,12 +35,17 @@ function ModalLogin(props){
         handleClose()
     }
 
-    
-    /*const login = () => {
-        backend.get('/user/'+name).then((response) => {
-            if(response.data.password == password){
+    var body = { 
+        'username': name, 
+        'password': password
+    }
+
+    const login = () => {
+        axios.post('http://localhost:8000/API/login/', body).then((response) => {
+            if (response.data.token !== undefined){
                 setWrongPassword(false)
                 props.loginCallback(name)
+                props.tokenCallback(response.data.token)
                 onTrigger()
                 handleClose()
             } else {
@@ -49,7 +54,7 @@ function ModalLogin(props){
         }).catch((error) => {
             console.log(error)
         }
-    )}*/
+    )}
 
 
     return(
@@ -79,7 +84,7 @@ function ModalLogin(props){
                     Fechar
                 </Button>
                 <Link to="/">
-                    {button && <Button className="" buttonStyle='btn--outline'>Entrar</Button>}
+                    {button && <Button onClick={login} className="" buttonStyle='btn--outline'>Entrar</Button>}
                 </Link>
                 </Modal.Footer>
             </Modal>

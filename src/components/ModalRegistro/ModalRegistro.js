@@ -2,6 +2,7 @@ import { Button } from '../Button/Button';
 import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
+import axios from 'axios';
 
 function ModalRegistro(props){
     const [button, setButton] = useState(true);
@@ -9,6 +10,7 @@ function ModalRegistro(props){
     const [show, setShow] = useState(true);
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [passwordIsDifferent, setPasswordIsDifferent] = useState(false);
     const [nameExists, setNameExists] = useState(false);
@@ -25,22 +27,27 @@ function ModalRegistro(props){
         handleClose()
     }
     
-    var body = {
-        name: name,
-        password: password
+    var body = { 
+        'username': name, 
+        'email': email, 
+        'password': password
     }
+        
 
-    /*const createUser = () => {
+    const createUser = () => {
         if (password != confirmPassword){
             setPasswordIsDifferent(true);
         } else {
-            backend.post('/user', body).then((response) => {
+            setPasswordIsDifferent(false);
+            setNameExists(false)
+            axios.post('http://localhost:8000/API/register/', body).then((response) => {
                 closeModal()
-            }).catch(() => {
+            }).catch((error) => {
                 setNameExists(true)
+                console.log(error)
             }
         )}
-    }*/
+    }
     
 
     return(
@@ -52,11 +59,12 @@ function ModalRegistro(props){
                 <Modal.Body>
                 <form className="form-login">
                     <input className="input" placeholder="Usuário" type="text" onInput={e => setName(e.target.value)}></input>
+                    <input className="input" placeholder="Email" type="text" onInput={e => setEmail(e.target.value)}></input>
                     <input className="input" placeholder="Senha" type="password" onInput={e => setPassword(e.target.value)}></input>
                     <input className="input" placeholder="Confirmar senha" type="password" onInput={e => setConfirmPassword(e.target.value)}></input>                    
                     <div className="senhaDiferente">
-                        {passwordIsDifferent && <h9>A senha é diferente</h9>}
-                        {nameExists && <h9>Esse nome já existe</h9>}
+                        {passwordIsDifferent && <h6>A senha é diferente</h6>}
+                        {nameExists && <h6>Esse nome já existe</h6>}
                     </div>
 
                 </form>
@@ -65,7 +73,7 @@ function ModalRegistro(props){
                 <Button variant="secondary" onClick={closeModal}>
                     Fechar
                 </Button>
-                    {button && <Button className="" buttonStyle='btn--outline'>Registrar</Button>}
+                    {button && <Button onClick={createUser} className="" buttonStyle='btn--outline'>Registrar</Button>}
                 </Modal.Footer>
             </Modal>
         </>

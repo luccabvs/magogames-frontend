@@ -13,7 +13,9 @@ function ModalGamesDetails(props){
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    
+    var name = props.name;
+
+
     const closeModal = () => {
       props.parentCallback(false)
       handleClose()
@@ -41,11 +43,24 @@ function ModalGamesDetails(props){
       })
     }
 
+    function postFavorite(){
+      var body = {
+        'user' : name,
+        'favorite' : props.content.dealID
+      }
+      axios.post('http://localhost:8000/API/favorite', body).then((response) => {
+        console.log(response)
+      })
+    }
+
     return (
       <>
         <Modal show={show} onHide={closeModal} onClick={gameDetails(props.content.gameID)}>
           <Modal.Header closeButton/>
           <Modal.Body className="popup" >
+            <Button variant="secondary" onClick={postFavorite}>
+              Favoritar
+            </Button>
             <img src={props.content.thumb} />
             <ul>
               <li>Nome: {props.content.title}</li>

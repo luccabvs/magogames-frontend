@@ -4,6 +4,8 @@ import './Navbar.css';
 import { Button } from '../Button/Button';
 import ModalLogin from '../ModalLogin/ModalLogin';
 import ModalRegistro from '../ModalRegistro/ModalRegistro';
+import axios from 'axios';
+import Sidebar from "../Sidebar/Sidebar";
 
 function Navbar(props) {
 
@@ -13,7 +15,8 @@ function Navbar(props) {
     const showModal = () => setModal(true);
     
     const [userName, setUserName] = useState("");
-  
+    const [token, setToken] = useState("");
+
     const [login, setLogin] = useState(false);
     const loginDone = () => {
       setLogin(true);
@@ -37,17 +40,29 @@ function Navbar(props) {
     
     const handleLoginCallback = (childData) =>{
       setUserName(childData)
-      props.userName(childData);
+      props.nameCallback(childData);
       loginDone()
     }
-  
-    /*const logout = () => {
-      setLogin(false);
-      setButton(true);
-      props.userName("");
-      setUserName("");
-    }*/
 
+    const handleTokenCallback = (childData) =>{
+      setToken(childData)
+    }
+    
+    const handleLoginSidebarCallback = (childData) =>{
+      setLogin(childData)
+    }
+    
+    const handleButtonSidebarCallback = (childData) =>{
+      setButton(childData)
+    }
+    
+    const handleNameSidebarCallback = (childData) =>{
+      setUserName(childData)
+    }
+
+
+
+  
     return (
         <>
             <nav className="navbar">
@@ -55,13 +70,22 @@ function Navbar(props) {
                   <Link to="/" className="navbar-logo">
                       <img src="/img/magoGames_logo.png" alt="magogames logo"/>
                   </Link>
-                  <div className="navbar-signup">
-                    {button && <Button className="navbar-signup" onClick={showModal} buttonStyle='btn--outline'>LOGIN</Button>}
+                  <div>
+                    <div className="navbar-signup">
+                      {button && <Button className="navbar-signup" onClick={showModal} buttonStyle='btn--outline'>LOGIN</Button>}
+                    </div>
+                    <div className='buttons'>
+                      <div className="navbar-signup">
+                        {login &&
+                          <Sidebar token={token} loginSidebarCallback={handleLoginSidebarCallback} buttonSidebarCallback={handleButtonSidebarCallback} nameSidebarCallback={handleNameSidebarCallback} name={userName} /> 
+                        }
+                      </div>
+                    </div>
                   </div>
                 </div>
             </nav>
             <div>
-                {modal && ( <ModalLogin loginCallback={handleLoginCallback} registerCallback={handleRegisterCallback} parentCallback = {handleCallback}/> )}
+                {modal && ( <ModalLogin loginCallback={handleLoginCallback} registerCallback={handleRegisterCallback} parentCallback={handleCallback} tokenCallback={handleTokenCallback} /> )}
             </div>
             <div>
                 {register && (<ModalRegistro parentCallback = {handleRegisterCallbackClose}/> )}

@@ -1,5 +1,13 @@
-.botao-ver-mais {
-    position: relative;
-    left: 60%;
+.price-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
+.card {
+    width: '30rem';
+}
+
+.img {
+    width: '18rem';
+}

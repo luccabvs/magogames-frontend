@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap';
 import { BsSliders } from "react-icons/bs";
 import { Dropdown } from 'react-bootstrap';
-import './Filter.css'
+import './Filter.css';
 import axios from 'axios';
 
 function Filter(props){
@@ -29,8 +29,6 @@ function Filter(props){
         setMaxPrice(event.target.value);
     }
 
-
-
     return(
         <Dropdown>
             <Dropdown.Toggle>
@@ -39,9 +37,9 @@ function Filter(props){
             <Dropdown.Menu>
                 <form onSubmit={handleSubmit}>
                     <label className='filtro-label'>Mín</label>
-                    <input className='filtro-input' label='Máximo' type='text' placeholder='U$'onInput={handleMinPriceChange} />
+                    <input className='filtro-input' label='Máximo' type='number' min='0'  placeholder='U$'onInput={handleMinPriceChange} />
                     <label className='filtro-label'>Máx</label>
-                    <input className='filtro-input' label='Máximo' type='text' placeholder='U$' onInput={handleMaxPriceChange} />
+                    <input className='filtro-input' label='Máximo' type='number' min='0'  placeholder='U$' onInput={handleMaxPriceChange} />
                     <Button type='submit' className='btn-filtrar'>Filtrar</Button>
                 </form>
             </Dropdown.Menu>
